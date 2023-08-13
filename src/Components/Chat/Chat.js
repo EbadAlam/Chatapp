@@ -13,11 +13,11 @@ function Chat() {
     setLoader(true);
     getDocs(collection(db, "messages"), orderBy("createdAt")).then(
       (QuerySnapshot) => {
-        // setMessages(QuerySnapshot.docs.map((doc) => doc.data()));
-        console.log(
-          "hello",
-          QuerySnapshot.docs.map((doc) => doc.data().text)
-        );
+        setMessages(QuerySnapshot.docs.map((doc) => doc.data()));
+        // console.log(
+        //   "hello",
+        //   QuerySnapshot.docs.map((doc) => doc.data().text)
+        // );
       }
     );
     setLoader(false);
@@ -36,7 +36,7 @@ function Chat() {
     <>
       <SignOut />
       <div className="container chat-div">
-        {/* {messages.map(({ id, text, photoURL, uid }) => {
+        {messages.map(({ id, text, photoURL, uid }) => {
           return (
             <div key={id} className="hello">
               <div
@@ -53,7 +53,7 @@ function Chat() {
               </div>
             </div>
           );
-        })} */}
+        })}
         {/* <div className="hello">
           <div className="message sent">
             <div className="user-image-div">
