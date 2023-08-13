@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { auth, db } from "../../Config/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Swal from "sweetalert2";
-function SendMessage() {
+import { SendOutlined } from "@ant-design/icons";
+
+function SendMessage({ scroll }) {
   const [msg, setMsg] = useState("");
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -22,17 +24,21 @@ function SendMessage() {
         createdAt: serverTimestamp(),
       });
       setMsg("");
+      scroll.current.scrollIntoView({ behavior: "smooth" });
     }
   };
   return (
-    <div>
-      <form onSubmit={formSubmitHandler}>
+    <div className="send-message-div">
+      <form className="send-message-form" onSubmit={formSubmitHandler}>
         <input
+          className="input-field"
           placeholder="Message"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
         />
-        <button type="submit">Send Message</button>
+        <button type="submit" className="send-message-btn">
+          <SendOutlined />
+        </button>
       </form>
     </div>
   );
