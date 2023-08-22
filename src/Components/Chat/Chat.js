@@ -2,26 +2,29 @@ import React, { useEffect, useState, useRef } from "react";
 import SignOut from "../SignOut/SignOut";
 import { auth, db } from "../../Config/firebase";
 import SendMessage from "../SendMessage/SendMessage";
-import { collection, getDocs, limit, orderBy } from "firebase/firestore";
+import { collection, getDocs, orderBy } from "firebase/firestore";
 
 function Chat() {
   const scroll = useRef();
   const [loader, setLoader] = useState(false);
   const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
+  const getData = async () => {
     setLoader(true);
-    getDocs(collection(db, "messages"), orderBy("createdAt")).then(
-      (QuerySnapshot) => {
-        setMessages(QuerySnapshot.docs.map((doc) => doc.data()));
-        // console.log(
-        //   "hello",
-        //   QuerySnapshot.docs.map((doc) => doc.data().text)
-        // );
-      }
-    );
+    const citiesRef = collection(db, "messages");
+    const q = await getDocs(citiesRef, orderBy("createdAt", "desc"));
+    const h = q.docs.map((doc) => doc.data());
+    setMessages(h);
+    console.log(h, "data");
+    // getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
+    //   (QuerySnapshot) => {
+    //     setMessages(QuerySnapshot.docs.map((doc) => doc.data()));
+    //   }
+    // );
     setLoader(false);
-  });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   if (loader) {
     return (
@@ -36,9 +39,10 @@ function Chat() {
     <>
       <SignOut />
       <div className="container chat-div">
-        {messages.map(({ id, text, photoURL, uid }) => {
+        {messages.map(({ text, photoURL, uid }) => {
+          // console.log(createdAt, "time");
           return (
-            <div key={id} className="hello">
+            <div className="hello">
               <div
                 className={`message ${
                   uid === auth.currentUser.uid ? "sent" : "receive"
