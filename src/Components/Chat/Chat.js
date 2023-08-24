@@ -6,49 +6,35 @@ import { collection, getDocs, orderBy } from "firebase/firestore";
 
 function Chat() {
   const scroll = useRef();
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
   const [messages, setMessages] = useState([]);
   const getData = async () => {
-    setLoader(true);
-    // const citiesRef = collection(db, "messages");
-    // const q = await getDocs(citiesRef, orderBy("createdAt", "desc"));
-    // const h = q.docs.map((doc) => doc.data());
-    // setMessages(h);
-    // console.log(h, "data");
-    // getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
-    //   (QuerySnapshot) => {
-    //     setMessages(QuerySnapshot.docs.map((doc) => doc.data()));
-    //   }
-    // );
-    getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
+    await getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
       (querySnapshot) => {
         const messagesData = querySnapshot.docs.map((doc) => {
           const data = doc.data();
-          // console.log(data.createdAt.toDate());
-          data.createdAt = data.createdAt.toDate();
           return data;
         });
 
         const sortedMessages = messagesData.sort((a, b) => a.createdAt - b.createdAt);
-
         setMessages(sortedMessages);
       }
     );
-    setLoader(false);
   };
   useEffect(() => {
+
     getData();
   });
 
-  if (loader) {
-    return (
-      <>
-        <div className="loader-container">
-          <div className="spinner"></div>
-        </div>
-      </>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <>
+  //       <div className="loader-container">
+  //         <div className="spinner"></div>
+  //       </div>
+  //     </>
+  //   );
+  // }
   return (
     <>
       <SignOut />

@@ -1,14 +1,17 @@
 * {
   font-family: cursive;
 }
+
 .sign-in-div {
   text-align: center;
 }
+
 .sign-out-div {
   text-align: center;
-  width: 35%;
+  width: 55.5%;
   margin: 0 auto;
 }
+
 .sign-in-btn {
   padding: 20px 50px 20px 50px;
   font-size: 20px;
@@ -16,6 +19,7 @@
   border-radius: 15px;
   cursor: pointer;
 }
+
 .sign-out-btn {
   width: 100%;
   padding: 20px 50px 20px 50px;
@@ -24,6 +28,7 @@
   border-radius: 15px 15px 0px 0px;
   cursor: pointer;
 }
+
 .chat-div {
   /* background-color: #032c2c; */
   background-color: #39a9a9;
@@ -33,14 +38,17 @@
   padding: 15px;
   box-sizing: border-box;
 }
+
 .user-image-div {
   width: 35px;
   /* margin-right: 10px; */
 }
+
 .user-image {
   width: 100%;
   border-radius: 50%;
 }
+
 .input-field {
   width: 100%;
   padding: 10px 15px;
@@ -49,9 +57,11 @@
   border-radius: 30px;
   box-sizing: border-box;
 }
+
 .input-field:focus {
   outline: none;
 }
+
 .send-message-btn {
   margin-left: -45px;
   border-radius: 50%;
@@ -61,6 +71,7 @@
   background-color: #128d8d;
   color: white;
 }
+
 .message {
   display: flex;
   justify-content: space-evenly;
@@ -72,23 +83,28 @@
   margin-bottom: 10px;
   box-sizing: border-box;
 }
+
 .hello {
   display: inline-block;
   width: 100%;
 }
+
 .sent {
   background: #086868;
   float: right;
   border-radius: 30px 10px 30px 30px;
 }
+
 .receive {
   background-color: black;
   color: white;
   border-radius: 10px 30px 30px 30px;
 }
+
 .text-div {
   width: 70%;
 }
+
 .loader {
   margin-top: 15%;
 }
