@@ -24,7 +24,7 @@ function Chat() {
       (querySnapshot) => {
         const messagesData = querySnapshot.docs.map((doc) => {
           const data = doc.data();
-          console.log(data.createdAt.toDate());
+          // console.log(data.createdAt.toDate());
           data.createdAt = data.createdAt.toDate();
           return data;
         });
