@@ -38,7 +38,7 @@ function Chat() {
   };
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   if (loader) {
     return (
