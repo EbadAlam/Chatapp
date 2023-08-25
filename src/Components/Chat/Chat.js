@@ -6,8 +6,8 @@ import { collection, getDocs, orderBy } from "firebase/firestore";
 
 function Chat() {
   const scroll = useRef();
-  // const [loader, setLoader] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [x,setX] = useState(false);
   const getData = async () => {
     await getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
       (querySnapshot) => {
@@ -22,9 +22,8 @@ function Chat() {
     );
   };
   useEffect(() => {
-
     getData();
-  });
+  },[x]);
 
   // if (loader) {
   //   return (
@@ -39,6 +38,7 @@ function Chat() {
     <>
       <SignOut />
       <div className="container chat-div">
+        <div className="chat-container">  
         {messages.map(({ text, photoURL, uid }) => {
           // console.log(createdAt, "time");
           return (
@@ -57,7 +57,9 @@ function Chat() {
             </div>
           );
         })}
-        {/* <div className="hello">
+        </div>
+        {/* <div className="chat-container">
+        <div className="hello">
           <div className="message sent">
             <div className="user-image-div">
               <img
@@ -84,8 +86,121 @@ function Chat() {
               <p className="text">hello</p>
             </div>
           </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message sent">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message sent">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
+        <div className="hello">
+          <div className="message receive">
+            <div className="user-image-div">
+              <img
+                className="user-image"
+                src="https://dummyimage.com/600x400/000/fff"
+                alt="-"
+              />
+            </div>
+            <div className="text-div">
+              <p className="text">hello</p>
+            </div>
+          </div>
+        </div>
         </div> */}
-        <SendMessage scroll={scroll} />
+        <SendMessage setX={setX} scroll={scroll} />
         <div ref={scroll}></div>
       </div>
     </>

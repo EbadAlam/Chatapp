@@ -8,7 +8,7 @@
 
 .sign-out-div {
   text-align: center;
-  width: 55.5%;
+  width: 40.75%;
   margin: 0 auto;
 }
 
@@ -130,6 +130,13 @@
   border-color: #3d5af1 transparent #3d5af1 transparent;
   border-radius: 50%;
   animation: spin-anim 1.2s linear infinite;
+}
+.chat-container{
+  overflow: scroll;
+  height: 455px;
+}
+.chat-container::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes spin-anim {
