@@ -4,7 +4,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { SendOutlined } from "@ant-design/icons";
 
-function SendMessage({ scroll,setX }) {
+function SendMessage({ scrollToBottom }) {
   const [msg, setMsg] = useState("");
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -24,8 +24,8 @@ function SendMessage({ scroll,setX }) {
         createdAt: serverTimestamp(),
       });
       setMsg("");
-      setX(true);
-      scroll.current.scrollIntoView({ behavior: "smooth" });
+      // scroll.current.scrollIntoView({ behavior: "smooth" });
+      scrollToBottom();
     }
   };
   return (

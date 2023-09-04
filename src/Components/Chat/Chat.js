@@ -5,9 +5,8 @@ import SendMessage from "../SendMessage/SendMessage";
 import { collection, getDocs, orderBy } from "firebase/firestore";
 
 function Chat() {
-  const scroll = useRef();
+  const scroll = useRef(null);
   const [messages, setMessages] = useState([]);
-  const [x,setX] = useState(false);
   const getData = async () => {
     await getDocs(collection(db, "messages"), orderBy("createdAt", "desc")).then(
       (querySnapshot) => {
@@ -21,9 +20,15 @@ function Chat() {
       }
     );
   };
+  const scrollToBottom = () => {
+    if (scroll.current) {
+      scroll.current.scrollTop = scroll.current.scrollHeight;
+    }
+  };
   useEffect(() => {
     getData();
-  },[x]);
+    
+  });
 
   // if (loader) {
   //   return (
@@ -39,10 +44,10 @@ function Chat() {
       <SignOut />
       <div className="container chat-div">
         <div className="chat-container">  
-        {messages.map(({ text, photoURL, uid }) => {
+        {messages.map(({ index,text, photoURL, uid }) => {
           // console.log(createdAt, "time");
           return (
-            <div className="hello">
+            <div key={index} ref={scroll} className="hello">
               <div
                 className={`message ${uid === auth.currentUser.uid ? "sent" : "receive"
                   }`}
@@ -200,8 +205,8 @@ function Chat() {
           </div>
         </div>
         </div> */}
-        <SendMessage setX={setX} scroll={scroll} />
-        <div ref={scroll}></div>
+        <SendMessage scrollToBottom={scrollToBottom} />
+        {/* <div ref={scroll}></div> */}
       </div>
     </>
   );
